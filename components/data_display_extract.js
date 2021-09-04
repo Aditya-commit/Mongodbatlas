@@ -1,4 +1,3 @@
-// This file is present in skeleton_loader branch
 import { 
 	ChevronDownIcon,
 	PencilIcon,
@@ -9,6 +8,7 @@ import {
 	TrashIcon as TrashIconSolid
 } from '@heroicons/react/solid';
 import { useState , useEffect , useCallback , useContext } from 'react';
+import Skeleton_Loader from './skeleton_loader';
 import { Option_context } from './center_container';
 import { Style_Context } from '../pages/index';
 import Update from './crud_buttons/update';
@@ -262,7 +262,7 @@ const Data_display_extract = ({val , database , collection , index}) => {
 					{single_jsx}
 				</>
 				:
-				<h3>Loading...</h3>
+				<Skeleton_Loader />
 			:
 				<>
 					{single_jsx}
