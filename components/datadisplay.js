@@ -108,8 +108,8 @@ const Dataresult = ({colname , dbname , newInsertedData , updated_data})=>{
 
 	return(
 	<>
-				{data.map((value)=>(
-					<Data_display_extract key={value['_id']} val={value} database={dbname} collection={colname} />
+				{data.map((value , index)=>( <Data_display_extract key={value['_id']} val={value} database={dbname} 
+					collection={colname} index={index} />
 				))}
 			</>
 	)

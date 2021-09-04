@@ -13,7 +13,7 @@ import { Style_Context } from '../pages/index';
 import Update from './crud_buttons/update';
 import axios from 'axios';
 
-const Data_display_extract = ({val , database , collection}) => {
+const Data_display_extract = ({val , database , collection , index}) => {
 
 	// INITIALISNG OUR CONTEXT SENT FROM THE TOP MOST LEVEL COMPONENT (PAGES INDEX FILE);
 	const Stylecontext = useContext(Style_Context);
@@ -254,13 +254,18 @@ const Data_display_extract = ({val , database , collection}) => {
 
 	return(
 		<>
-			{single_jsx
-			?
-			<>
-				{single_jsx}
-			</>
+			{index == 1 ?
+				single_jsx
+				?
+				<>
+					{single_jsx}
+				</>
+				:
+				<h3>Loading...</h3>
 			:
-			<h3>Loading...</h3>
+				<>
+					{single_jsx}
+				</>
 			}
 		</>
 	);
