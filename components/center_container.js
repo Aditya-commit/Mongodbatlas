@@ -126,7 +126,6 @@ const Middlecontainer = ({collection_name , databaseName})=>{
 	}
 
 	const updateData = (value) => {
-		console.log(value);
 		setData_updated(value);
 	}
 

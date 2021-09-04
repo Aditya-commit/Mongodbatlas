@@ -293,7 +293,6 @@ const Updateone = () => {
 							'query':new_str_array
 						})
 						.then((res)=>{
-							console.log(res);
 							if(res.data.nModified == 1 || res.data.nModified > 0){
 								Options.updatedData(new_str_array[1])
 								setSuccess(true);
