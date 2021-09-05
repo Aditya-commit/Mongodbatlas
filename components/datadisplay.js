@@ -12,6 +12,7 @@ import {
 import { Suspense , useState , useEffect , useCallback , useContext } from 'react';
 import { Option_context } from './center_container';
 import { Style_Context } from '../pages/index';
+import Skeleton_Loader from './skeleton_loader';
 import Data_display_extract from './data_display_extract';
 import axios from 'axios';
 import useSWR from 'swr';

@@ -131,7 +131,7 @@ const Middlecontainer = ({collection_name , databaseName})=>{
 
 	return(
 		<div className='bg-gray-100 w-full h-full'>
-			<div className='sticky top-0 bg-gray-50'>
+			<div className='sticky top-0 bg-gray-50 z-10'>
 				<div className='text-center mb-3'>
 				{collection_name &&
 					<h3 className = 'select-none font-mono font-bold bg-transparent text-gray-400 text-xl'>
@@ -203,7 +203,7 @@ const Middlecontainer = ({collection_name , databaseName})=>{
 						</div>
 					</ul>
 				<hr />
-			<Option_context.Provider value={{'resetFunc':resetState , 'database_name':databaseName , 'collection_name':collection_name , 'findresult':findOne_result , 'setinsertedData':insertedData , 'updatedData':updateData}}>
+			<Option_context.Provider value={{'resetFunc':resetState , 'database_name':databaseName , 'collection_name':collection_name , 'findresult':findOne_result , 'setinsertedData':insertedData}}>
 				<Crud_btn opt={opt} />
 			</Option_context.Provider>
 			</div>

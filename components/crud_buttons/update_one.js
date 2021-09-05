@@ -294,7 +294,6 @@ const Updateone = () => {
 						})
 						.then((res)=>{
 							if(res.data.nModified == 1 || res.data.nModified > 0){
-								Options.updatedData(new_str_array[1])
 								setSuccess(true);
 								setActive(true);
 							}
