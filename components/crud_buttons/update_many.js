@@ -296,6 +296,7 @@ const Updateone = () => {
 						})
 						.then((res)=>{
 							if(res.data.nModified > 0){
+								Options.updatedData();
 								setSuccess(true);
 								setActive(true);
 								setNmodified(res.data.nModified);

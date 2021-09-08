@@ -203,7 +203,7 @@ const Middlecontainer = ({collection_name , databaseName})=>{
 						</div>
 					</ul>
 				<hr />
-			<Option_context.Provider value={{'resetFunc':resetState , 'database_name':databaseName , 'collection_name':collection_name , 'findresult':findOne_result , 'setinsertedData':insertedData}}>
+			<Option_context.Provider value={{'resetFunc':resetState , 'database_name':databaseName , 'collection_name':collection_name , 'findresult':findOne_result , 'setinsertedData':insertedData , 'updatedData':updateData}}>
 				<Crud_btn opt={opt} />
 			</Option_context.Provider>
 			</div>
