@@ -7,6 +7,7 @@ import React , { useState , useEffect , useContext } from 'react';
 import ReactDOM from 'react-dom';
 import { Collection_name } from './main';
 import { Style_Context } from '../pages/index';
+import DbAlertModal from './dbalert_modal';
 import Add_db from './add_db';
 
 const Database=({getDBname})=>{
@@ -14,6 +15,11 @@ const Database=({getDBname})=>{
 	const [databaselist , setDatabaselist] = useState(null);
 
 	const [dbmodal , showDbmodal] = useState(false);
+
+	// THIS WILL SHOW THE ALERT POPUP MODAL FOR CONFIRMATION OF DELETING DATABASE
+	const [dblaertmodal , showDbAlertModal] = useState(false);
+
+	const [database_to_be_deleted , setDeletedDatabase] = useState(null);
 
 	// INITIALISING OUR PROVIDER VALUE
 	const collection_context = useContext(Collection_name);
@@ -24,6 +30,20 @@ const Database=({getDBname})=>{
 	const grabDatabaseName=(event)=>{
 		getDBname(event.target.id);	// SENDING THE NAME OF THE SELECTED DATABASE TO SIDEBAR COMPONENT		
 		collection_context.db_Name(event.target.id); // SENDING THE NAME OF THE SELECTED DATABASE TO THE MAIN COMPONENT
+	}
+
+	const getDelDatabase = (name) => {
+		Style_context.style_changer('yes')
+		showDbAlertModal(true);
+		setDeletedDatabase(name);
+	}
+
+	const remove_Del = (choice) => {
+		if(choice == true){
+			deleteDatabse(database_to_be_deleted);
+		}
+		showDbAlertModal(false);
+		Style_context.style_changer('no');
 	}
 
 	const deleteDatabse = (name) => {
@@ -104,10 +124,18 @@ const Database=({getDBname})=>{
 					:
 					null
 					}
+					{dblaertmodal
+					?
+					<>
+						<DbAlertModal db={database_to_be_deleted} remove_del_database={remove_Del} />
+					</>
+					:
+					null
+					}
 					{databaselist.map((value)=>(
-						<div className='flex flex-row space-x-3 select-none hover:bg-gray-200 active:border-2 active:border-green-500 active:border-dashed active:rounded-sm' onClick={grabDatabaseName} key={value.name}>
-							<li className='truncate pl-3 pl-3 py-2 w-40 text-gray-600' id={value.name}>{value.name}</li>
-							<XCircleIcon width={15} height={15} className={'text-gray-400 hover:text-green-600 mt-2'} onClick={()=>deleteDatabse(value.name)} />
+						<div className='flex flex-row space-x-3 select-none hover:bg-gray-200 active:border-2 active:border-green-500 active:border-dashed active:rounded-sm' key={value.name}>
+							<li className='truncate pl-3 pl-3 py-2 w-40 text-gray-600' id={value.name} onClick={grabDatabaseName}>{value.name}</li>
+							<XCircleIcon width={15} height={15} className={'text-gray-400 hover:text-green-600 mt-2'} onClick={()=>getDelDatabase(value.name)} />
 						</div>
 					))}
 				</>
