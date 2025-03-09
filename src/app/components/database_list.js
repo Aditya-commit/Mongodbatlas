@@ -22,7 +22,7 @@ const DatabaseList = ({connected}) => {
 
     return(
 
-        <div className='flex flex-col bg-white'>
+        <div className='flex flex-col bg-white pt-3'>
 
             <div className='w-full px-4'>
                 <button className='flex justify-center items-center space-x-3 bg-gray-100 w-full py-3 rounded-full cursor-pointer hover:bg-gray-200 transition-colors duration-300 ease-in-out group'>

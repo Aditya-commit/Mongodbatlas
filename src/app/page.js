@@ -25,7 +25,7 @@ const Home=()=>{
 
 
 
-  const [showConnModal , setShowConnModal] = useState(true);
+  const [showConnModal , setShowConnModal] = useState(false);
 
 
 
