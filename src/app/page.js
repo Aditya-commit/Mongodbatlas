@@ -18,7 +18,7 @@ import ConnectionModal from './components/connection_ modal';
 
 const Home=()=>{
 
-  const [connected , setConnected]  = useState(null); // TELLS WHETHER THE DATABASE CONNECTION IS ESTABLISHED OR NOT
+  const [connected , setConnected]  = useState(false); // TELLS WHETHER THE DATABASE CONNECTION IS ESTABLISHED OR NOT
 
   const [selectedDb , setSelectedDbb] = useState(null); // STORES WHICH DATABASE IS SELECTED
   const [selectedColl , setSelectedColl] = useState(null); // STORES WHICH COLLECTION IS STORED
@@ -31,6 +31,8 @@ const Home=()=>{
 
   const toggleConnModal = useCallback(()=>setShowConnModal(!showConnModal),[showConnModal]);
 
+  const updateConnection = status => setConnected(status);
+
 
 
   return(
@@ -38,7 +40,7 @@ const Home=()=>{
 
       {showConnModal && (
         <ModalContainer>
-          <ConnectionModal toggleConnModal={toggleConnModal} />
+          <ConnectionModal toggleConnModal={toggleConnModal} updateConnection={updateConnection} />
         </ModalContainer>
       )}
 
