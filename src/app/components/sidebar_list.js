@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
+import SideBarRow from './sidebar_row';
 
 
 
-const SidebarList = ({loading}) => {
+const SidebarList = ({loading , data , selectedRow , selectFunc}) => {
     return(
-        <ol className='flex flex-col space-y-8 py-10 h-full overflow-y-auto'>
+        <ol className={`flex flex-col ${loading ? 'space-y-8' : 'space-y-3'} py-7 h-full overflow-y-auto px-3`}>
             {loading
             ?
             <>
@@ -55,6 +56,9 @@ const SidebarList = ({loading}) => {
             </>
             :
             <>
+                {data.map((row , index) => (
+                    <SideBarRow key={index} name={row} selectedRow={selectedRow} selectFunc={selectFunc} />
+                ))}
             </>
             }
         </ol>
@@ -62,5 +66,8 @@ const SidebarList = ({loading}) => {
 }
 SidebarList.proTypes = {
     loading : PropTypes.bool.isRequired,
+    data : PropTypes.array.isRequired,
+    selectedRow : PropTypes.string.isRequired,
+    selectFunc : PropTypes.func.isRequired,
 }
 export default SidebarList;

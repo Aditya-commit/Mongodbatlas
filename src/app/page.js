@@ -20,7 +20,7 @@ const Home=()=>{
 
   const [connected , setConnected]  = useState(false); // TELLS WHETHER THE DATABASE CONNECTION IS ESTABLISHED OR NOT
 
-  const [selectedDb , setSelectedDbb] = useState(null); // STORES WHICH DATABASE IS SELECTED
+  const [selectedDb , setSelectedDb] = useState(null); // STORES WHICH DATABASE IS SELECTED
   const [selectedColl , setSelectedColl] = useState(null); // STORES WHICH COLLECTION IS STORED
 
 
@@ -35,6 +35,10 @@ const Home=()=>{
 
 
 
+  const selectDbFunc = dbName => (setSelectedDb(dbName) , setSelectedColl(null)); // RESET THE SELECTED COLLECTION WHEN SELECTED DATABASE IS CHANGED
+  const selectColFunc = colName => setSelectedColl(colName);
+
+
   return(
     <>
 
@@ -47,10 +51,10 @@ const Home=()=>{
       <Navbar />
       <Main>
         <Sidebar>
-          <DatabaseList connected={connected} />
-          <CollectionList />
+          <DatabaseList connected={connected} selectedDb={selectedDb} selectDbFunc={selectDbFunc} />
+          <CollectionList selectedDb={selectedDb} selectedColl={selectedColl} selectColFunc={selectColFunc} />
         </Sidebar>
-        <CenterContainer toggleConnModal={toggleConnModal} />
+        <CenterContainer toggleConnModal={toggleConnModal} db={selectedDb} col={selectedColl} />
       </Main>
     </>
 	);

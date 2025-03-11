@@ -35,58 +35,61 @@ const ConnectionModal = ({toggleConnModal , updateConnection}) => {
 
     const connectToDb = () => {
 
-        const formData = new FormData();
+        if(!loading){
 
-        formData.append('host' , cred.host);
-        formData.append('port' , cred.port);
-        formData.append('user' , cred.user);
-        formData.append('password' , cred.password);
-
-
-        const url = `${process.env.NEXT_PUBLIC_REMOTE_URL}/connect`;
-
-        setLoading(true);
-
-        fetch(url , {
-            method : 'post',
-            body : formData,
-            credentials : 'include',
-        })
-        .then(res => {
-
-            const contentType = res.headers.get('Content-Type');
-            const statusCode = res.status;
-
-            if(/text\/plain/.test(contentType)){
-
-                return res.text().then(msg => ({contentType : contentType , statusCode : statusCode , msg : msg }));
-
-            }
-            else{
-
-                return { contentType : contentType , statusCode : statusCode }
-            }
-
-        })
-        .then(({contentType , statusCode , msg}) => {
-
-            if(statusCode === 200){
-
-                updateConnection(true);
-                back();
-            }
-            else{
+            const formData = new FormData();
+    
+            formData.append('host' , cred.host);
+            formData.append('port' , cred.port);
+            formData.append('user' , cred.user);
+            formData.append('password' , cred.password);
+    
+    
+            const url = `${process.env.NEXT_PUBLIC_REMOTE_URL}/connect`;
+    
+            setLoading(true);
+    
+            fetch(url , {
+                method : 'post',
+                body : formData,
+                credentials : 'include',
+            })
+            .then(res => {
+    
+                const contentType = res.headers.get('Content-Type');
+                const statusCode = res.status;
+    
+                if(/text\/plain/.test(contentType)){
+    
+                    return res.text().then(msg => ({contentType : contentType , statusCode : statusCode , msg : msg }));
+    
+                }
+                else{
+    
+                    return { contentType : contentType , statusCode : statusCode }
+                }
+    
+            })
+            .then(({contentType , statusCode , msg}) => {
+    
+                if(statusCode === 200){
+    
+                    updateConnection(true);
+                    back();
+                }
+                else{
+                    
+                    // ERROR HANDLING
+                }
+            })
+            .catch(error => {
                 
                 // ERROR HANDLING
-            }
-        })
-        .catch(error => {
-            
-            // ERROR HANDLING
-        })
-        .finally(()=>{
-            setLoading(false);
-        });
+            })
+            .finally(()=>{
+                setLoading(false);
+            });
+        }
     }
 
 
