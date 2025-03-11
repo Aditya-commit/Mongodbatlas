@@ -23,7 +23,7 @@ const FilterButton = ({name , options}) => {
     return(
 
         <div className='relative' onBlur={handleBlur}>
-            <button className={`${nunito_sans} cursor-pointer font-[600] text-lg text-gray-800 hover:text-gray-500 group flex items-center space-x-2`} onClick={toggleFunc}>
+            <button className={`${nunito_sans.className} cursor-pointer font-[700] text-lg text-gray-800 hover:text-gray-500 group flex items-center space-x-2`} onClick={toggleFunc}>
                 <span>{name}</span>
                 <ArrowDown style='text-gray-800 group-hover:text-gray-500' />
             </button>
