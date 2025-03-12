@@ -78,10 +78,10 @@ const CenterContainer = ({toggleConnModal , db , col}) => {
     },[db, col])
 
     return(
-        <div className='grid grid-rows-[max-content_1fr]'>
+        <div className='grid grid-rows-[max-content_1fr] h-[calc(100vh-89px)]'>
             <Filter toggleConnModal={toggleConnModal} />
         
-            <ol className='bg-gray-100 overflow-scroll space-y-2 px-2 pt-3'>
+            <ol className='bg-gray-100 overflow-y-auto space-y-2 px-2 pt-3'>
                 {loading
                 ?
                 <DocumentSkeleton />
