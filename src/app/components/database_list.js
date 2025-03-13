@@ -1,11 +1,18 @@
 import { useState , useEffect } from 'react';
 import PropTypes from 'prop-types';
 
+
 import SidebarList from './sidebar_list';
+import ModalContainer from './modal_container';
+import DbModal from './db_modal';
+
+
 
 import PlusSolid from '../icons/plus_solid';
 
 import { nunito_sans } from '../fonts/nunito_sans';
+
+
 
 
 
@@ -18,6 +25,9 @@ const DatabaseList = ({connected , selectedDb , selectDbFunc}) => {
 
 
     const [data , setData] = useState([]);
+
+
+    const [toggle , setToggle] = useState(false);
 
 
 
@@ -69,22 +79,52 @@ const DatabaseList = ({connected , selectedDb , selectDbFunc}) => {
 
 
 
+    const handleToggle = () => setToggle(!toggle);
+
+
+
+
+    const updateData = (action , name) => {
+
+        let dataCopy = data.slice();
+
+        switch(action){
+
+            case 'insert':
+
+                dataCopy.push(name);
+                break;
+        }
+
+        setData(dataCopy);
+    }
+
+
+
     useEffect(()=>{
         connected && (fetchLists());
     },[connected]);
 
     return(
 
-        <div className='flex flex-col bg-white pt-3'>
+        <>
+            <div className='flex flex-col bg-white pt-3'>
 
-            <div className='w-full grid grid-cols-[1fr_max-content] items-center space-x-3 bg-gray-100 w-full px-6 py-3 border border-r-0 border-l-0 border-gray-300'>
-                <span className={`text-gray-800 justify-self-center ${nunito_sans.className} font-[700] text-[19px]`}>Database</span>
-                <button className='group' title='Add Database'>
-                    <PlusSolid style='text-2xl text-gray-800 group-hover:text-green-500 group-focus-visible:text-green-500' />
-                </button>
+                <div className='w-full grid grid-cols-[1fr_max-content] items-center space-x-3 bg-gray-100 w-full px-6 py-3 border border-r-0 border-l-0 border-gray-300'>
+                    <span className={`text-gray-800 justify-self-center ${nunito_sans.className} font-[700] text-[19px]`}>Database</span>
+                    <button className='group' title='Add Database' onClick={handleToggle}>
+                        <PlusSolid style='text-2xl text-gray-800 group-hover:text-green-500 group-focus-visible:text-green-500' />
+                    </button>
+                </div>
+                <SidebarList loading={loading} error={error} data={data} selectFunc={selectDbFunc} selectedRow={selectedDb} />
             </div>
-            <SidebarList loading={loading} error={error} data={data} selectFunc={selectDbFunc} selectedRow={selectedDb} />
-        </div>
+            {toggle && (
+                <ModalContainer>
+                    <DbModal backFunc={handleToggle} updateData={updateData} />
+                </ModalContainer>
+            )}
+        </>
+
 
     )
 }
