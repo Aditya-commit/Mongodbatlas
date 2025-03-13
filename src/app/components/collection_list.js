@@ -86,6 +86,18 @@ const CollectionList = ({selectedDb , selectedColl , selectColFunc}) => {
 
                 dataCopy.push(name);
                 break;
+
+
+            case 'delete':
+
+                const foundIndex = dataCopy.findIndex(el => el === name);
+
+                if(foundIndex !== -1){
+
+                    dataCopy.splice(foundIndex , 1);
+                }
+
+                break;
         }
 
         setData(dataCopy);
@@ -116,7 +128,7 @@ const CollectionList = ({selectedDb , selectedColl , selectColFunc}) => {
             {toggle && (
                 <SideBarInput updateData={updateData} db={selectedDb} />
             )}
-            <SidebarList loading={loading} data={data} selectedRow={selectedColl} selectFunc={selectColFunc} />
+            <SidebarList loading={loading} data={data} db={selectedDb} selectedRow={selectedColl} category='collection' selectFunc={selectColFunc} updateData={updateData} />
         </div>
 
     )

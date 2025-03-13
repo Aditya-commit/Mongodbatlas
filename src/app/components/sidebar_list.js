@@ -3,7 +3,12 @@ import SideBarRow from './sidebar_row';
 
 
 
-const SidebarList = ({loading , data , selectedRow , selectFunc}) => {
+const SidebarList = ({loading , data , selectedRow , db , category , selectFunc , updateData}) => {
+
+
+
+
+
     return(
         <ol className={`flex flex-col ${loading ? 'space-y-8' : 'space-y-3'} py-7 h-full overflow-y-auto px-3`}>
             {loading
@@ -57,7 +62,7 @@ const SidebarList = ({loading , data , selectedRow , selectFunc}) => {
             :
             <>
                 {data.map((row , index) => (
-                    <SideBarRow key={index} name={row} selectedRow={selectedRow} selectFunc={selectFunc} />
+                    <SideBarRow key={index} name={row} selectedRow={selectedRow} selectFunc={selectFunc} updateData={updateData} db={db} category={category} />
                 ))}
             </>
             }
@@ -68,6 +73,9 @@ SidebarList.proTypes = {
     loading : PropTypes.bool.isRequired,
     data : PropTypes.array.isRequired,
     selectedRow : PropTypes.string.isRequired,
+    db : PropTypes.string,
     selectFunc : PropTypes.func.isRequired,
+    category : PropTypes.oneOf(['database' ,'collection']),
+    updateData : PropTypes.func.isRequired,
 }
 export default SidebarList;

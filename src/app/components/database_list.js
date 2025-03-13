@@ -94,6 +94,17 @@ const DatabaseList = ({connected , selectedDb , selectDbFunc}) => {
 
                 dataCopy.push(name);
                 break;
+
+            
+            case 'delete':
+
+                const foundIndex = dataCopy.findIndex(el => el === name);
+
+                if(foundIndex !== -1){
+
+                    dataCopy.splice(foundIndex , 1);
+                }
+                break;
         }
 
         setData(dataCopy);
@@ -116,7 +127,7 @@ const DatabaseList = ({connected , selectedDb , selectDbFunc}) => {
                         <PlusSolid style='text-2xl text-gray-800 group-hover:text-green-500 group-focus-visible:text-green-500' />
                     </button>
                 </div>
-                <SidebarList loading={loading} error={error} data={data} selectFunc={selectDbFunc} selectedRow={selectedDb} />
+                <SidebarList loading={loading} error={error} data={data} category='database' selectFunc={selectDbFunc} selectedRow={selectedDb} updateData={updateData} />
             </div>
             {toggle && (
                 <ModalContainer>
