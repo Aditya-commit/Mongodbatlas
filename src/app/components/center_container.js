@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import Filter from './filter_container';
 import DocumentSkeleton from './documen_skeleton';
 import Document from './document';
+import ModalContainer from './modal_container';
+import InsertModal from './insert_modal';
 
 
 
@@ -12,6 +14,9 @@ const CenterContainer = ({toggleConnModal , db , col}) => {
 
     const [loading , setLoading] = useState(false);
     const [data , setData] = useState([]);
+
+
+    const [showInsertModal , setShowInsertModal] = useState(false);
 
 
 
@@ -65,6 +70,18 @@ const CenterContainer = ({toggleConnModal , db , col}) => {
 
 
 
+
+
+
+
+
+    const toggleInsertModal = () => setShowInsertModal(!showInsertModal);
+
+
+
+
+
+
     useEffect(()=>{
 
         if(db !== null && col !== null){
@@ -75,23 +92,34 @@ const CenterContainer = ({toggleConnModal , db , col}) => {
             resetData();
         }
 
-    },[db, col])
+    },[db, col]);
+
+
+
+
 
     return(
-        <div className='grid grid-rows-[max-content_1fr] h-[calc(100vh-89px)]'>
-            <Filter toggleConnModal={toggleConnModal} />
-        
-            <ol className='bg-gray-100 overflow-y-auto space-y-2 px-2 pt-3'>
-                {loading
-                ?
-                <DocumentSkeleton />
-                :
-                <>
-                    {data.map((row , index) => <Document key={index} data={row} />)}
-                </>
-                }
-            </ol>
-        </div>
+        <>
+            <div className='grid grid-rows-[max-content_1fr] h-[calc(100vh-89px)]'>
+                <Filter toggleConnModal={toggleConnModal} toggleInsertModal={toggleInsertModal} />
+            
+                <ol className='bg-gray-100 overflow-y-auto space-y-2 px-2 pt-3'>
+                    {loading
+                    ?
+                    <DocumentSkeleton />
+                    :
+                    <>
+                        {data.map((row , index) => <Document key={index} data={row} />)}
+                    </>
+                    }
+                </ol>
+            </div>
+            {showInsertModal && (
+                <ModalContainer>
+                    <InsertModal toggleInsertModal={toggleInsertModal} />
+                </ModalContainer>
+            )}
+        </>
     )
 }
 CenterContainer.propTypes = {
