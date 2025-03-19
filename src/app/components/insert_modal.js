@@ -17,7 +17,7 @@ import { jsx } from 'react/jsx-runtime';
 
 
 
-const InsertModal = ({connectToDb , toggleInsertModal}) => {
+const InsertModal = ({db , col , toggleInsertModal , insertData}) => {
 
     const [start , setStart] = useState(false);
     const [loading , setLoading] = useState(false);
@@ -132,6 +132,21 @@ const InsertModal = ({connectToDb , toggleInsertModal}) => {
     }
 
     
+    const deleteDoc = id => {
+
+        let dataCopy = data.slice();
+
+
+        const docIndex = dataCopy.findIndex(el => el.id === id);
+
+        if(docIndex !== -1){
+
+            dataCopy.splice(docIndex , 1);
+
+            setData(dataCopy);
+        }
+    }
+
 
     const deletePair = name => {
 
@@ -167,6 +182,92 @@ const InsertModal = ({connectToDb , toggleInsertModal}) => {
     }
 
 
+
+    const submitForm = () => {
+
+        if(!loading){
+
+            setLoading(true);
+
+            let processedData = [];
+
+            data.map(rows => {
+
+                if(rows.pairs.length > 0){
+
+                    let object = {};
+
+                    rows.pairs.map(row => {
+
+                        object[row[Object.keys(row)[0]]] = row[Object.keys(row)[1]]
+                        
+                    });
+
+                    processedData.push(object);
+                }
+            });
+
+            
+            const url = `${process.env.NEXT_PUBLIC_REMOTE_URL}/insert_doc`;
+
+            fetch(url , {
+                method : 'post',
+                body : JSON.stringify({db : db , col : col , data : processedData}),
+                headers : {
+                    'Content-Type' : 'application/json'
+                },
+                credentials : 'include'
+            })
+            .then(res => {
+
+                const statusCode = res.status;
+                const contentType = res.headers.get("Content-Type");
+
+
+                if(res.status === 200){
+
+                    return res.json().then(responseData => ({statusCode : statusCode , responseData : responseData , contentType : contentType}));
+                }
+                else{
+
+                    if(/text\plain/.test(contentType)){
+
+                        return res.text().then(msg => ({statusCode : statusCode , statusCode : statusCode , msg : msg}))
+                    }
+                    else{
+
+                        return {
+                            statusCode : statusCode,
+                            contentType : contentType,
+                            msg : 'Oops! Something went wrong'
+                        }
+                    }
+                }
+            })
+            .then(({statusCode , contentType , responseData , msg}) => {
+
+                if(statusCode === 200){
+
+                    responseData.map((row , index)=> (processedData[index] = {"_id" : row , ...processedData[index]}));
+
+                    insertData(processedData);
+
+                    setStart(false);
+
+                    setTimeout(()=>toggleInsertModal() , 300);
+                }
+                else{
+
+                    // HANDLE ERRORS
+                }
+            })
+            .catch(error => console.log(error))
+            .finally(()=>setLoading(false));
+
+        }
+    }
+
+
     useEffect(()=>setStart(true) , []);
 
     return(
@@ -183,10 +284,13 @@ const InsertModal = ({connectToDb , toggleInsertModal}) => {
                                 <FormKeyValue key={index} id={rows.id} keyName={Object.keys(pair)[0]} keyValue={pair[Object.keys(pair)[0]]} valueName={Object.keys(pair)[1]} valueData={pair[Object.keys(pair)[1]]} handleKeyChange={handleKeyChange} handleValueChange={handleValueChange} deletePair={deletePair} />
                             ))}
                         </div>
-                        <div className='flex justify-end px-4 py-3'>
-                            <button type='button' className={`transition-colors duration-300 ease-in-out group focus-visible:bg-black flex items-center border border-gray-600 hover:border-black rounded-full px-4 py-1`} onClick={()=>addPairs(rows.id)}>
+                        <div className='flex justify-end items-center px-4 gap-x-7 py-3'>
+                            <button type='button' className={`transition-colors duration-300 ease-in-out group focus-visible:bg-black flex items-center border border-gray-600 hover:border-black rounded-full px-4 py-1.5`} onClick={()=>addPairs(rows.id)}>
                                 <span className={`transition-colors duration-300 ease-in-out ${nunito_sans.className} font-[600] border-r border-gray-600 group-focus-visible:border-gray-200 pr-3 text-gray-700 group-hover:text-black group-focus-visible:text-white`}>Key Value</span>
                                 <PlusOutline style='transition-colors duration-300 ease-in-out text-2xl pl-3 text-gray-700 group-hover:text-black group-focus-visible:text-white' />
+                            </button>
+                            <button className={`transiton-all duration-200 ease-in-out px-6 border-2 border-transparent ${nunito_sans.className} font-[600] bg-red-500 hover:bg-red-600 focus-visible:shadow-[0_0_1px_3px_red] focus-visible:border-white text-white rounded-full py-1.5`} onClick={()=>deleteDoc(rows.id)}>
+                                Delete
                             </button>
                         </div>
                     </div>
@@ -199,7 +303,7 @@ const InsertModal = ({connectToDb , toggleInsertModal}) => {
             </div>
 
             <div className='flex justify-center w-full px-10 pt-10 pb-18'>
-                <button className={`outline-none cursor-pointer border-3 ${loading ? 'bg-green-300 border-green-300' : 'border-green-600 transition-all duration-300 ease-in-out bg-green-500 hover:bg-green-600 focus-visible:shadow focus-visible:shadow-[0_0_0_3px_#01b701] focus-visible:border-green-100'} w-full ${nunito_sans.className} font-[600] text-[19px]  text-white rounded h-[50px]`}>
+                <button className={`outline-none cursor-pointer border-3 ${loading ? 'bg-green-300 border-green-300' : 'border-green-500 transition-all duration-300 ease-in-out bg-green-500 hover:bg-green-600 focus-visible:shadow focus-visible:shadow-[0_0_0_3px_#01b701] focus-visible:border-green-100'} w-full ${nunito_sans.className} font-[600] text-[19px]  text-white rounded h-[50px]`} onClick={submitForm}>
                     {loading
                     ?
                     <span style={{fontWeight:700}}>Inserting...</span>
@@ -213,5 +317,8 @@ const InsertModal = ({connectToDb , toggleInsertModal}) => {
 }
 InsertModal.propTypes = {
     toggleInsertModal : PropTypes.func.isRequired,
+    db : PropTypes.string.isRequired,
+    col : PropTypes.string.isRequired,
+    insertData : PropTypes.func.isRequired
 }
 export default InsertModal;

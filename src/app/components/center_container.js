@@ -79,6 +79,7 @@ const CenterContainer = ({toggleConnModal , db , col}) => {
 
 
 
+    const insertData = newData => setData([...data , ...newData]);
 
 
 
@@ -116,7 +117,7 @@ const CenterContainer = ({toggleConnModal , db , col}) => {
             </div>
             {showInsertModal && (
                 <ModalContainer>
-                    <InsertModal toggleInsertModal={toggleInsertModal} />
+                    <InsertModal db={db} col={col} toggleInsertModal={toggleInsertModal} insertData={insertData} />
                 </ModalContainer>
             )}
         </>
@@ -124,5 +125,7 @@ const CenterContainer = ({toggleConnModal , db , col}) => {
 }
 CenterContainer.propTypes = {
     toggleConnModal : PropTypes.func.isRequired,
+    db : PropTypes.string,
+    col : PropTypes.string
 }
 export default CenterContainer;
