@@ -1,4 +1,5 @@
 import { useState , useEffect} from 'react';
+import { useSearchParams } from 'next/navigation';
 import PropTypes from 'prop-types';
 
 import Filter from './filter_container';
@@ -6,6 +7,7 @@ import DocumentSkeleton from './documen_skeleton';
 import Document from './document';
 import ModalContainer from './modal_container';
 import InsertModal from './insert_modal';
+import DeleteAlertModal from './delete_alert_modal';
 
 
 
@@ -17,7 +19,10 @@ const CenterContainer = ({toggleConnModal , db , col}) => {
 
 
     const [showInsertModal , setShowInsertModal] = useState(false);
+    const [showDeleteModal , setShowDeleteModal] = useState(false);
 
+
+    const searchParams = useSearchParams();
 
 
     const fetchData = () => {
@@ -83,6 +88,23 @@ const CenterContainer = ({toggleConnModal , db , col}) => {
 
 
 
+
+    const deleteDoc = id => {
+
+        let dataCopy = data.slice();
+
+
+        const docIndex = dataCopy.findIndex(el => el['_id'] === id);
+
+        docIndex !== -1 && dataCopy.splice(docIndex , 1);
+
+        setData(dataCopy);
+        
+    }
+
+
+
+
     useEffect(()=>{
 
         if(db !== null && col !== null){
@@ -94,6 +116,23 @@ const CenterContainer = ({toggleConnModal , db , col}) => {
         }
 
     },[db, col]);
+
+
+
+    useEffect(()=>{
+
+        const id = searchParams.get('id')
+        
+        if(searchParams.get('delete_doc') === 'true' && (id !== '' && id !== null)){
+
+            setShowDeleteModal(true);
+        }
+        else{
+            setShowDeleteModal(false);
+        }
+
+
+    },[searchParams]);
 
 
 
@@ -118,6 +157,11 @@ const CenterContainer = ({toggleConnModal , db , col}) => {
             {showInsertModal && (
                 <ModalContainer>
                     <InsertModal db={db} col={col} toggleInsertModal={toggleInsertModal} insertData={insertData} />
+                </ModalContainer>
+            )}
+            {showDeleteModal && (
+                <ModalContainer>
+                    <DeleteAlertModal heading='Delete Document' db={db} col={col} deleteDoc={deleteDoc} />
                 </ModalContainer>
             )}
         </>
