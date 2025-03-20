@@ -104,6 +104,25 @@ const CenterContainer = ({toggleConnModal , db , col}) => {
 
 
 
+    const deleteField = (id , key) => {
+
+        let dataCopy = data.slice();
+
+
+        const docIndex = dataCopy.findIndex(el => el['_id'] === id);
+
+        if(docIndex !== -1){
+
+            let updatedObject = {...dataCopy[docIndex]};
+
+            delete updatedObject[key];
+
+            dataCopy[docIndex] = updatedObject;
+
+            setData(dataCopy);
+        }
+    }
+
 
     useEffect(()=>{
 
@@ -149,7 +168,7 @@ const CenterContainer = ({toggleConnModal , db , col}) => {
                     <DocumentSkeleton />
                     :
                     <>
-                        {data.map((row , index) => <Document key={index} data={row} />)}
+                        {data.map((row , index) => <Document key={index} data={row} db={db} col={col} deleteField={deleteField} />)}
                     </>
                     }
                 </ol>
