@@ -8,6 +8,7 @@ import Document from './document';
 import ModalContainer from './modal_container';
 import InsertModal from './insert_modal';
 import DeleteAlertModal from './delete_alert_modal';
+import EditModal from './edit_modal';
 
 
 
@@ -20,6 +21,8 @@ const CenterContainer = ({toggleConnModal , db , col}) => {
 
     const [showInsertModal , setShowInsertModal] = useState(false);
     const [showDeleteModal , setShowDeleteModal] = useState(false);
+    const [showEditModal , setShowEditModal] = useState(false);
+    const [editDoc , setEditDoc] = useState(null);
 
 
     const searchParams = useSearchParams();
@@ -93,13 +96,12 @@ const CenterContainer = ({toggleConnModal , db , col}) => {
 
         let dataCopy = data.slice();
 
-
         const docIndex = dataCopy.findIndex(el => el['_id'] === id);
 
         docIndex !== -1 && dataCopy.splice(docIndex , 1);
 
         setData(dataCopy);
-        
+
     }
 
 
@@ -124,6 +126,23 @@ const CenterContainer = ({toggleConnModal , db , col}) => {
     }
 
 
+
+    const updateData = updatedDoc => {
+
+        let dataCopy = data.slice();
+
+        const docIndex = dataCopy.findIndex(el => el['_id'] === updatedDoc['_id']);
+
+        if(docIndex !==  -1){
+
+            dataCopy[docIndex] = updatedDoc;
+
+            setData(dataCopy);
+        }
+    }
+
+
+
     useEffect(()=>{
 
         if(db !== null && col !== null){
@@ -145,11 +164,28 @@ const CenterContainer = ({toggleConnModal , db , col}) => {
         if(searchParams.get('delete_doc') === 'true' && (id !== '' && id !== null)){
 
             setShowDeleteModal(true);
+            setShowEditModal(false);
+            setEditDoc(null);
+        }
+        else if(searchParams.get('edit_doc') === 'true' &&  (id !== '' && id !== null)){
+            
+            setShowEditModal(true);
+            setShowDeleteModal(false);
+
+            // FIND THE DOCUMENT
+
+            const docIndex = data.findIndex(el => el['_id'] === id);
+
+            console.log(docIndex);
+
+            docIndex !== -1 && setEditDoc(data[docIndex]);
+
         }
         else{
             setShowDeleteModal(false);
+            setShowEditModal(false);
+            setEditDoc(null);
         }
-
 
     },[searchParams]);
 
@@ -183,8 +219,13 @@ const CenterContainer = ({toggleConnModal , db , col}) => {
                     <DeleteAlertModal heading='Delete Document' db={db} col={col} deleteDoc={deleteDoc} />
                 </ModalContainer>
             )}
+            {(showEditModal && editDoc) && (
+                <ModalContainer>
+                    <EditModal data={editDoc} db={db} col={col} updateData={updateData} />
+                </ModalContainer>
+            )}
         </>
-    )
+    );
 }
 CenterContainer.propTypes = {
     toggleConnModal : PropTypes.func.isRequired,

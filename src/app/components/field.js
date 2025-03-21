@@ -100,9 +100,9 @@ const Field = ({db , col , id , keyName , value , deleteField}) => {
             {keyName === '_id'
             ?
                 <>
-                    <button className='px-1 border-2 border-transparent focus-visible:border-yellow-600 rounded text-gray-500 hover:text-yellow-400 focus-visible:text-yellow-400' title='Edit'>
+                    <Link href={`?edit_doc=true&id=${id}`} className='px-1 border-2 border-transparent focus-visible:border-yellow-600 rounded text-gray-500 hover:text-yellow-400 focus-visible:text-yellow-400' title='Edit'>
                         <Pencil style='text-2xl' />
-                    </button>
+                    </Link>
                     <Link href={`?delete_doc=true&id=${id}`} className='px-1 border-2 border-transparent focus-visible:border-yellow-600 rounded text-gray-500 hover:text-red-400 focus-visible:text-red-400' title='Delete'>
                         <Dustbin style='text-2xl' />
                     </Link>
