@@ -101,19 +101,19 @@ const DbModal = ({backFunc , updateData}) => {
             <div className='grid grid-cols-2 pt-10 pb-5 px-9 gap-x-14'>
 
                 <div className='grid grid-cols-[max-content_1fr] gap-x-3 items-center outline-none'>
-                    <label htmlFor='database' className={`${nunito_sans.className} font-[600] text-lg`}>Database</label>
-                    <input type='text' name='database' id='database' placeholder='test' className={`outline-none border-3 border-gray-200 focus:border-green-600 transition-border duration-300 ease-in-out rounded px-3 py-2 text-[17px] caret-green-400 ${nunito_sans.className}`} value={details.database} onChange={handleChange} />
+                    <label htmlFor='database' className={`${nunito_sans.className} font-[600] text-[15px]`}>Database</label>
+                    <input type='text' name='database' id='database' placeholder='test' className={`outline-none border-3 border-gray-200 focus:border-green-600 transition-border duration-300 ease-in-out rounded px-3 py-1.5 text-[15px] caret-green-400 ${nunito_sans.className}`} value={details.database} onChange={handleChange} />
                 </div>
 
                 <div className='grid grid-cols-[max-content_1fr] gap-x-3 items-center outline-none'>
-                    <label htmlFor='collection' className={`${nunito_sans.className} font-[600] text-lg`}>Collection</label>
-                    <input type='text' name='collection' id='collection' placeholder='mycollection' className={`outline-none border-3 border-gray-200 focus:border-green-600 transition-border duration-300 ease-in-out rounded px-3 py-2 text-[17px] caret-green-400 ${nunito_sans.className}`} value={details.collection} onChange={handleChange} />
+                    <label htmlFor='collection' className={`${nunito_sans.className} font-[600] text-[15px]`}>Collection</label>
+                    <input type='text' name='collection' id='collection' placeholder='mycollection' className={`outline-none border-3 border-gray-200 focus:border-green-600 transition-border duration-300 ease-in-out rounded px-3 py-1.5 text-[15px] caret-green-400 ${nunito_sans.className}`} value={details.collection} onChange={handleChange} />
                 </div>
 
             </div>
 
-            <div className='flex justify-center w-full px-10 pt-6 pb-10'>
-                <button className={`outline-none cursor-pointer border-3 ${loading ? 'bg-green-300 border-green-300' : 'border-green-600 transition-all duration-300 ease-in-out bg-green-500 hover:bg-green-600 focus-visible:shadow focus-visible:shadow-[0_0_0_3px_#01b701] focus-visible:border-green-100'} w-full ${nunito_sans.className} font-[600] text-[19px]  text-white rounded h-[50px]`} onClick={createDb}>
+            <div className='flex justify-center w-full px-10 pt-6 pb-5'>
+                <button className={`outline-none cursor-pointer border-3 ${loading ? 'bg-green-300 border-green-300' : 'border-green-600 transition-all duration-300 ease-in-out bg-green-500 hover:bg-green-600 focus-visible:shadow focus-visible:shadow-[0_0_0_3px_#01b701] focus-visible:border-green-100'} w-full ${nunito_sans.className} font-[600] text-white rounded h-[47px]`} onClick={createDb}>
                     {loading
                     ?
                     <span style={{fontWeight:700}}>Connecting...</span>

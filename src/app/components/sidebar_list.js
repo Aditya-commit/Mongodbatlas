@@ -10,52 +10,52 @@ const SidebarList = ({loading , data , selectedRow , db , category , selectFunc 
 
 
     return(
-        <ol className={`flex flex-col ${loading ? 'space-y-8' : 'space-y-3'} py-7 h-full overflow-y-auto px-3`}>
+        <ol className={`flex flex-col ${loading ? 'space-y-8' : 'space-y-3'} py-7 h-full overflow-y-auto px-3`} style={{'scrollbarWidth' : 'thin'}}>
             {loading
             ?
             <>
                 <li className='grid grid-cols-[1fr_max-content] gap-x-5 pl-10 pr-5'>
-                    <span className='py-3 rounded-full animate-pulse bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300'></span>
+                    <span className='py-2 rounded-full animate-pulse bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300'></span>
                     <span className='w-4 h-4 rounded-full animate-pulse bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300'></span>
                 </li>
                 <li className='grid grid-cols-[1fr_max-content] gap-x-5 pl-10 pr-5'>
-                    <span className='py-3 rounded-full animate-pulse bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300'></span>
+                    <span className='py-2 rounded-full animate-pulse bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300'></span>
                     <span className='w-4 h-4 rounded-full animate-pulse bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300'></span>
                 </li>
                 <li className='grid grid-cols-[1fr_max-content] gap-x-5 pl-10 pr-5'>
-                    <span className='py-3 rounded-full animate-pulse bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300'></span>
+                    <span className='py-2 rounded-full animate-pulse bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300'></span>
                     <span className='w-4 h-4 rounded-full animate-pulse bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300'></span>
                 </li>
                 <li className='grid grid-cols-[1fr_max-content] gap-x-5 pl-10 pr-5'>
-                    <span className='py-3 rounded-full animate-pulse bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300'></span>
+                    <span className='py-2 rounded-full animate-pulse bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300'></span>
                     <span className='w-4 h-4 rounded-full animate-pulse bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300'></span>
                 </li>
                 <li className='grid grid-cols-[1fr_max-content] gap-x-5 pl-10 pr-5'>
-                    <span className='py-3 rounded-full animate-pulse bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300'></span>
+                    <span className='py-2 rounded-full animate-pulse bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300'></span>
                     <span className='w-4 h-4 rounded-full animate-pulse bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300'></span>
                 </li>
                 <li className='grid grid-cols-[1fr_max-content] gap-x-5 pl-10 pr-5'>
-                    <span className='py-3 rounded-full animate-pulse bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300'></span>
+                    <span className='py-2 rounded-full animate-pulse bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300'></span>
                     <span className='w-4 h-4 rounded-full animate-pulse bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300'></span>
                 </li>
                 <li className='grid grid-cols-[1fr_max-content] gap-x-5 pl-10 pr-5'>
-                    <span className='py-3 rounded-full animate-pulse bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300'></span>
+                    <span className='py-2 rounded-full animate-pulse bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300'></span>
                     <span className='w-4 h-4 rounded-full animate-pulse bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300'></span>
                 </li>
                 <li className='grid grid-cols-[1fr_max-content] gap-x-5 pl-10 pr-5'>
-                    <span className='py-3 rounded-full animate-pulse bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300'></span>
+                    <span className='py-2 rounded-full animate-pulse bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300'></span>
                     <span className='w-4 h-4 rounded-full animate-pulse bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300'></span>
                 </li>
                 <li className='grid grid-cols-[1fr_max-content] gap-x-5 pl-10 pr-5'>
-                    <span className='py-3 rounded-full animate-pulse bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300'></span>
+                    <span className='py-2 rounded-full animate-pulse bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300'></span>
                     <span className='w-4 h-4 rounded-full animate-pulse bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300'></span>
                 </li>
                 <li className='grid grid-cols-[1fr_max-content] gap-x-5 pl-10 pr-5'>
-                    <span className='py-3 rounded-full animate-pulse bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300'></span>
+                    <span className='py-2 rounded-full animate-pulse bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300'></span>
                     <span className='w-4 h-4 rounded-full animate-pulse bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300'></span>
                 </li>
                 <li className='grid grid-cols-[1fr_max-content] gap-x-5 pl-10 pr-5'>
-                    <span className='py-3 rounded-full animate-pulse bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300'></span>
+                    <span className='py-2 rounded-full animate-pulse bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300'></span>
                     <span className='w-4 h-4 rounded-full animate-pulse bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300'></span>
                 </li>
             </>

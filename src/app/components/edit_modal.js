@@ -173,21 +173,21 @@ const EditModal = ({data ,db , col , updateData}) => {
                             <li key={index} className='flex gap-x-7 items-center'>
                                 {(keyName !== '_id') && (
                                     <>
-                                        <input type='text' name={keyName} className={`outline-none ${nunito_sans.className} font-[600] border-b-2 border-yellow-200 focus-visible:border-yellow-500 transition-all duration-300 ease-in-out px-3 py-1.5 text-lg text-yellow-600 caret-yellow-400`} value={keyName} onChange={handleKeyChange} spellCheck={false} />
-                                        <span className={`${nunito_sans.className} font-[600] text-lg`}>:</span>
-                                        <input type='text' name={keyName} className={`${nunito_sans.className} font-[500] outline-none border-b-2 border-gray-300 focus-visible:border-black transition-all duration-300 ease-in-out px-3 py-2 text-lg`} value={dataObj[keyName]} onChange={handleValueChange} spellCheck={false} />
+                                        <input type='text' name={keyName} className={`outline-none ${nunito_sans.className} font-[600] border-b-2 border-yellow-200 focus-visible:border-yellow-500 transition-all duration-300 ease-in-out px-3 py-1 text-yellow-600 caret-yellow-400`} value={keyName} onChange={handleKeyChange} spellCheck={false} />
+                                        <span className={`${nunito_sans.className} font-[600]`}>:</span>
+                                        <input type='text' name={keyName} className={`${nunito_sans.className} font-[500] outline-none border-b-2 border-gray-300 focus-visible:border-black transition-all duration-300 ease-in-out px-3 py-1`} value={dataObj[keyName]} onChange={handleValueChange} spellCheck={false} />
                                         <button type='button' className='group border-2 border-transparent focus-visible:border-red-500 rounded-full' title='Remove Field' onClick={()=>deletePair(keyName)}>
-                                            <XCloseOutline style='text-xl text-red-500 group-hover:text-red-700' />
+                                            <XCloseOutline style='text-red-500 group-hover:text-red-700' />
                                         </button>
                                     </>
                                 )}
                             </li>
                         ))}
                     </ol>
-                    <div className='flex justify-end items-center px-4 gap-x-7 py-3'>
+                    <div className='flex justify-end items-center px-4 gap-x-7 py-3 mt-7'>
                         <button type='button' className={`transition-colors duration-300 ease-in-out group focus-visible:bg-black flex items-center border border-gray-600 hover:border-black rounded-full px-4 py-1.5`} onClick={addPairs}>
-                            <span className={`transition-colors duration-300 ease-in-out ${nunito_sans.className} font-[600] border-r border-gray-600 group-focus-visible:border-gray-200 pr-3 text-gray-700 group-hover:text-black group-focus-visible:text-white`}>Key Value</span>
-                            <PlusOutline style='transition-colors duration-300 ease-in-out text-2xl pl-3 text-gray-700 group-hover:text-black group-focus-visible:text-white' />
+                            <span className={`transition-colors duration-300 ease-in-out ${nunito_sans.className} font-[600] border-r border-gray-600 group-focus-visible:border-gray-200 pr-3 text-gray-700 group-hover:text-black group-focus-visible:text-white text-sm`}>Key Value</span>
+                            <PlusOutline style='transition-colors duration-300 ease-in-out text-[21px] pl-3 text-gray-700 group-hover:text-black group-focus-visible:text-white' />
                         </button>
                     </div>
                 </div>
@@ -195,8 +195,8 @@ const EditModal = ({data ,db , col , updateData}) => {
             </form>
 
 
-            <div className='flex justify-center w-full px-10 py-10 '>
-                <button className={`outline-none cursor-pointer border-3 ${loading ? 'bg-green-300 border-green-300' : 'border-green-500 transition-all duration-300 ease-in-out bg-green-500 hover:bg-green-600 focus-visible:shadow focus-visible:shadow-[0_0_0_3px_#01b701] focus-visible:border-green-100'} w-full ${nunito_sans.className} font-[600] text-[19px]  text-white rounded h-[50px]`} onClick={submitForm}>
+            <div className='flex justify-center w-full px-10 pt-10 pb-5'>
+                <button className={`outline-none cursor-pointer border-3 ${loading ? 'bg-green-300 border-green-300' : 'border-green-500 transition-all duration-300 ease-in-out bg-green-500 hover:bg-green-600 focus-visible:shadow focus-visible:shadow-[0_0_0_3px_#01b701] focus-visible:border-green-100'} w-full ${nunito_sans.className} font-[600] text-[17px] text-white rounded h-[47px]`} onClick={submitForm}>
                     {loading
                     ?
                     <span style={{fontWeight:700}}>Updating...</span>

@@ -80,40 +80,40 @@ const Field = ({db , col , id , keyName , value , deleteField}) => {
 
     return(
 
-        <li className={`grid ${keyName === '_id' ? 'grid-cols-[max-content_max-content_1fr_max-content_max-content]' : 'grid-cols-[max-content_max-content_1fr_max-content]'} gap-x-3 group`}>
-            <span className={`${nunito_sans.className} font-[700] text-gray-900 text-[17px]`}>{keyName}</span>
-            <span className={`${nunito_sans.className} text-[17px] font-[600]`}>:</span>
+        <li className={`grid ${keyName === '_id' ? 'grid-cols-[max-content_max-content_1fr_max-content_max-content]' : 'grid-cols-[max-content_max-content_1fr_max-content]'} gap-x-2 group`}>
+            <span className={`${nunito_sans.className} text-[15px] font-[700] text-gray-900`}>{keyName}</span>
+            <span className={`${nunito_sans.className} text-[15px] font-[600]`}>:</span>
             {(typeof(value) === 'object' || Array.isArray(value))
             ?
             <button className='flex space-x-1 items-center'>
                     {typeof(value) === 'object' && (
-                        <span className={`${nunito_sans.className} text-[17px] text-gray-700 font-[600]`}>Object</span>
+                        <span className={`${nunito_sans.className} text-[15px] text-gray-700 font-[600]`}>Object</span>
                     )}
                     {Array.isArray(value) && (
-                        <span className={`${nunito_sans.className} text-[17px] text-gray-700 font-[600]`}>Array</span>
+                        <span className={`${nunito_sans.className} text-[15px] text-gray-700 font-[600]`}>Array</span>
                     )}
-                <ArrowDown style='text-lg' />
+                <ArrowDown />
             </button>
             :
-            <span className={`${nunito_sans.className} text-[16.9px] font-[500] ${keyName === '_id' ? 'text-yellow-600' : typeof(value) === 'number' ? 'text-blue-600' : 'text-gray-800'}`}>{value}</span>
+            <span className={`${nunito_sans.className} font-[500] ${keyName === '_id' ? 'text-yellow-600' : typeof(value) === 'number' ? 'text-blue-600' : 'text-gray-800'} text-[15px]`}>{value}</span>
             }
             {keyName === '_id'
             ?
                 <>
                     <Link href={`?edit_doc=true&id=${id}`} className='px-1 border-2 border-transparent focus-visible:border-yellow-600 rounded text-gray-500 hover:text-yellow-400 focus-visible:text-yellow-400' title='Edit'>
-                        <Pencil style='text-2xl' />
+                        <Pencil style='text-xl' />
                     </Link>
                     <Link href={`?delete_doc=true&id=${id}`} className='px-1 border-2 border-transparent focus-visible:border-yellow-600 rounded text-gray-500 hover:text-red-400 focus-visible:text-red-400' title='Delete'>
-                        <Dustbin style='text-2xl' />
+                        <Dustbin style='text-xl' />
                     </Link>
                 </>
             :
             <button className={`${loading ? 'border-transparent text-green-500' : 'invisible group-hover:visible border-transparent focus-visible:border-yellow-600 rounded text-red-500 hover:text-red-400'} px-1 border-2 `} title={loading ? 'Deleting' : 'Delete'} onClick={handleFieldDeletion}>
                 {loading
                 ?
-                <Spinner style='text-xl animate-spin' />
+                <Spinner style='animate-spin' />
                 :
-                <Dustbin style='text-xl' />
+                <Dustbin />
                 }
             </button>
             }

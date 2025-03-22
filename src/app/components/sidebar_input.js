@@ -85,7 +85,7 @@ const SideBarInput = ({updateData , db}) => {
 
     return(
         <div className={`w-full bg-[#137c13] flex items-center my-2 px-3 transition-[height] duration-300 ease-in-out ${start ? 'h-[100px]' : 'h-0'} overflow-hidden`}>
-            <input type='text' className={`w-full border-2 border-[#00b94a] shadow-[0_0_0_2px_#a5a5a5] rounded-full px-6 ${nunito_sans.className} font-[600] ${loading ? 'bg-gray-200 text-gray-500' : 'bg-white text-black'} py-1.5 outline-none`} placeholder='Enter collection name' onChange={handleChange} value={name} onKeyDown={handleKeyDown} readOnly={loading} />
+            <input type='text' className={`w-full border-2 border-[#00b94a] shadow-[0_0_0_2px_#a5a5a5] rounded-full px-6 ${nunito_sans.className} font-[600] ${loading ? 'bg-gray-200 text-gray-500' : 'bg-white text-black'} py-1 outline-none`} placeholder='Enter collection name' onChange={handleChange} value={name} onKeyDown={handleKeyDown} readOnly={loading} />
         </div>
     );
 }

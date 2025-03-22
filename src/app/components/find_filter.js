@@ -97,14 +97,14 @@ const FindFiter = ({db , col , loading , filterDocs}) => {
     return(
 
         <>
-            <div className='flex space-x-2 items-center bg-gray-100 px-4 py-2 rounded'>
-                <FilterIcon style='text-lg text-gray-800' />
-                <span className={`font-mono text-xl font-[700] text-gray-700`}>Filter</span>
+            <div className='flex space-x-2 items-center bg-gray-100 px-4 py-1.5 rounded'>
+                <FilterIcon style='text-sm text-gray-800' />
+                <span className={`font-mono text-lg font-[700] text-gray-700`}>Filter</span>
             </div>
 
-            <input type='text' className={`outline-none font-mono border-3 border-gray-300 rounded-lg px-3 focus-visible:border-gray-600 focus-visible:bg-white transition-colors duration-300 ease-in-out mr-14 ml-2 bg-gray-100`} placeholder='{ age : { $gt : 20 } , name : "Aditya" }' value={query} onChange={handleChange} spellCheck={false} />
+            <input type='text' className={`outline-none font-mono border-3 border-gray-300 rounded-lg px-3 py-1.5 focus-visible:border-gray-600 focus-visible:bg-white transition-colors duration-300 ease-in-out mr-14 ml-2 bg-gray-100`} placeholder='{ "age" : { "$gt" : 20 } , "name" : "Aditya" }' value={query} onChange={handleChange} spellCheck={false} />
 
-            <button className={`${nunito_sans.className} ${(searching || loading) ? 'bg-gray-100 text-gray-500 border-gray-300' : 'bg-white text-black transition-all duration-300 ease-in-out hover:bg-gray-200 border-gray-500 focus-visible:border-[#ceffce] focus-visible:shadow focus-visible:shadow-[0_0_1px_3px_#008d00]'} font-[600] text-lg px-8 py-1 border-2 rounded`} onClick={reset ? resetFunc : queryData}>
+            <button className={`${nunito_sans.className} ${(searching || loading) ? 'bg-gray-100 text-gray-500 border-gray-300' : 'bg-white text-black transition-all duration-300 ease-in-out hover:bg-gray-200 border-gray-500 focus-visible:border-[#ceffce] focus-visible:shadow focus-visible:shadow-[0_0_1px_3px_#008d00]'} font-[600] px-8 py-1.5 border-2 rounded`} onClick={reset ? resetFunc : queryData}>
                 {reset ? <>Reset</> : <>Find</>}
             </button>
         </>

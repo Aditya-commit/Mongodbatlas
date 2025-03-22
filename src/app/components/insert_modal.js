@@ -284,12 +284,12 @@ const InsertModal = ({db , col , toggleInsertModal , insertData}) => {
                                 <FormKeyValue key={index} id={rows.id} keyName={Object.keys(pair)[0]} keyValue={pair[Object.keys(pair)[0]]} valueName={Object.keys(pair)[1]} valueData={pair[Object.keys(pair)[1]]} handleKeyChange={handleKeyChange} handleValueChange={handleValueChange} deletePair={deletePair} />
                             ))}
                         </div>
-                        <div className='flex justify-end items-center px-4 gap-x-7 py-3'>
+                        <div className='flex justify-end items-center gap-x-7 py-3 mt-6'>
                             <button type='button' className={`transition-colors duration-300 ease-in-out group focus-visible:bg-black flex items-center border border-gray-600 hover:border-black rounded-full px-4 py-1.5`} onClick={()=>addPairs(rows.id)}>
-                                <span className={`transition-colors duration-300 ease-in-out ${nunito_sans.className} font-[600] border-r border-gray-600 group-focus-visible:border-gray-200 pr-3 text-gray-700 group-hover:text-black group-focus-visible:text-white`}>Key Value</span>
-                                <PlusOutline style='transition-colors duration-300 ease-in-out text-2xl pl-3 text-gray-700 group-hover:text-black group-focus-visible:text-white' />
+                                <span className={`transition-colors duration-300 ease-in-out ${nunito_sans.className} font-[600] border-r border-gray-600 group-focus-visible:border-gray-200 pr-3 text-gray-700 group-hover:text-black group-focus-visible:text-white text-sm`}>Key Value</span>
+                                <PlusOutline style='transition-colors duration-300 ease-in-out text-[21px] pl-3 text-gray-700 group-hover:text-black group-focus-visible:text-white' />
                             </button>
-                            <button className={`transiton-all duration-200 ease-in-out px-6 border-2 border-transparent ${nunito_sans.className} font-[600] bg-red-500 hover:bg-red-600 focus-visible:shadow-[0_0_1px_3px_red] focus-visible:border-white text-white rounded-full py-1.5`} onClick={()=>deleteDoc(rows.id)}>
+                            <button className={`transiton-all duration-200 ease-in-out px-6 border-2 border-transparent ${nunito_sans.className} font-[600] bg-red-500 hover:bg-red-600 focus-visible:shadow-[0_0_1px_3px_red] focus-visible:border-white text-white text-sm rounded-full py-1.5`} onClick={()=>deleteDoc(rows.id)}>
                                 Delete
                             </button>
                         </div>
@@ -299,11 +299,11 @@ const InsertModal = ({db , col , toggleInsertModal , insertData}) => {
             </form>
 
             <div className='flex justify-end w-full pr-10 pt-10'>
-                <button className={`transition-border duration-300 ease-in-out border-2 border-transparent focus-visible:border-yellow-600 rounded px-3 py-1 ${nunito_sans.className} font-[600] text-yellow-600 hover:text-yellow-400 text-[17px]`} onClick={addDoc}>Add Document +</button>
+                <button className={`transition-border duration-300 ease-in-out border-2 border-transparent focus-visible:border-yellow-600 rounded px-3 py-1 ${nunito_sans.className} font-[600] text-yellow-600 hover:text-yellow-400 text-[15px]`} onClick={addDoc}>Add Document +</button>
             </div>
 
-            <div className='flex justify-center w-full px-10 pt-10 pb-18'>
-                <button className={`outline-none cursor-pointer border-3 ${loading ? 'bg-green-300 border-green-300' : 'border-green-500 transition-all duration-300 ease-in-out bg-green-500 hover:bg-green-600 focus-visible:shadow focus-visible:shadow-[0_0_0_3px_#01b701] focus-visible:border-green-100'} w-full ${nunito_sans.className} font-[600] text-[19px]  text-white rounded h-[50px]`} onClick={submitForm}>
+            <div className='flex justify-center w-full px-10 pt-10 pb-6'>
+                <button className={`outline-none cursor-pointer border-3 ${loading ? 'bg-green-300 border-green-300' : 'border-green-500 transition-all duration-300 ease-in-out bg-green-500 hover:bg-green-600 focus-visible:shadow focus-visible:shadow-[0_0_0_3px_#01b701] focus-visible:border-green-100'} w-full ${nunito_sans.className} font-[600] text-[17px] text-white rounded h-[47px]`} onClick={submitForm}>
                     {loading
                     ?
                     <span style={{fontWeight:700}}>Inserting...</span>

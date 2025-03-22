@@ -122,9 +122,9 @@ const DatabaseList = ({connected , selectedDb , selectDbFunc}) => {
             <div className='flex flex-col bg-white pt-3'>
 
                 <div className='w-full grid grid-cols-[1fr_max-content] items-center space-x-3 bg-gray-100 w-full px-6 py-3 border border-r-0 border-l-0 border-gray-300'>
-                    <span className={`text-gray-800 justify-self-center ${nunito_sans.className} font-[700] text-[19px]`}>Database</span>
+                    <span className={`text-gray-800 justify-self-center ${nunito_sans.className} font-[700] text-lg`}>Database</span>
                     <button className='group' title='Add Database' onClick={handleToggle}>
-                        <PlusSolid style='text-2xl text-gray-800 group-hover:text-green-500 group-focus-visible:text-green-500' />
+                        <PlusSolid style='text-xl text-gray-800 group-hover:text-green-500 group-focus-visible:text-green-500' />
                     </button>
                 </div>
                 <SidebarList loading={loading} error={error} data={data} category='database' selectFunc={selectDbFunc} selectedRow={selectedDb} updateData={updateData} />

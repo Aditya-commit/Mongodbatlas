@@ -204,7 +204,7 @@ const CenterContainer = ({toggleConnModal , db , col}) => {
             <div className='grid grid-rows-[max-content_1fr] h-[calc(100vh-89px)]'>
                 <Filter toggleConnModal={toggleConnModal} toggleInsertModal={toggleInsertModal} db={db} col={col} loading={loading} filterDocs={filterDocs} />
             
-                <ol className='bg-gray-100 overflow-y-auto space-y-2 px-2 pt-3'>
+                <ol className='bg-gray-100 overflow-y-auto space-y-2 px-2 pt-3' style={{'scrollbarWidth' : 'thin'}}>
                     {loading
                     ?
                     <DocumentSkeleton />
