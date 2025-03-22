@@ -17,6 +17,7 @@ const CenterContainer = ({toggleConnModal , db , col}) => {
 
     const [loading , setLoading] = useState(false);
     const [data , setData] = useState([]);
+    const [filterData , setFilterData] = useState(null);
 
 
     const [showInsertModal , setShowInsertModal] = useState(false);
@@ -143,6 +144,11 @@ const CenterContainer = ({toggleConnModal , db , col}) => {
 
 
 
+    const filterDocs = queryData => setFilterData(queryData);
+    
+
+
+
     useEffect(()=>{
 
         if(db !== null && col !== null){
@@ -196,7 +202,7 @@ const CenterContainer = ({toggleConnModal , db , col}) => {
     return(
         <>
             <div className='grid grid-rows-[max-content_1fr] h-[calc(100vh-89px)]'>
-                <Filter toggleConnModal={toggleConnModal} toggleInsertModal={toggleInsertModal} />
+                <Filter toggleConnModal={toggleConnModal} toggleInsertModal={toggleInsertModal} db={db} col={col} loading={loading} filterDocs={filterDocs} />
             
                 <ol className='bg-gray-100 overflow-y-auto space-y-2 px-2 pt-3'>
                     {loading
@@ -204,7 +210,12 @@ const CenterContainer = ({toggleConnModal , db , col}) => {
                     <DocumentSkeleton />
                     :
                     <>
-                        {data.map((row , index) => <Document key={index} data={row} db={db} col={col} deleteField={deleteField} />)}
+                        {(filterData)
+                        ?
+                        <>{filterData.map((row , index) => <Document key={index} data={row} db={db} col={col} deleteField={deleteField} />)}</>
+                        :
+                        <>{data.map((row , index) => <Document key={index} data={row} db={db} col={col} deleteField={deleteField} />)}</>
+                        }
                     </>
                     }
                 </ol>
