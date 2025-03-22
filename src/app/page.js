@@ -1,6 +1,6 @@
 'use client';
 
-import { useState , useCallback } from 'react';
+import { useState , useCallback, Suspense } from 'react';
 
 
 
@@ -54,7 +54,9 @@ const Home=()=>{
           <DatabaseList connected={connected} selectedDb={selectedDb} selectDbFunc={selectDbFunc} />
           <CollectionList selectedDb={selectedDb} selectedColl={selectedColl} selectColFunc={selectColFunc} />
         </Sidebar>
-        <CenterContainer toggleConnModal={toggleConnModal} db={selectedDb} col={selectedColl} />
+        <Suspense>
+          <CenterContainer toggleConnModal={toggleConnModal} db={selectedDb} col={selectedColl} />
+        </Suspense>
       </Main>
     </>
 	);
